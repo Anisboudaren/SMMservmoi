@@ -1,0 +1,43 @@
+{
+  "name": "servmoismm",
+  "version": "1.0.0",
+  "description": "this is the first try to make an smm for servmoi",
+  "main": "app.js",
+  "scripts": {
+    "test": "start"
+  },
+  "author": "anis",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "chargily-epay-gateway": "^1.4.10",
+    "connect-mongo": "^5.0.0",
+    "connect-mongodb-session": "^3.1.1",
+    "connect-redis": "^7.0.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.0.3",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anisboudaren/SMMservmoi.git"
+  },
+  "keywords": [
+    "smm",
+    "servmoi",
+    "anis"
+  ],
+  "bugs": {
+    "url": "https://github.com/Anisboudaren/SMMservmoi/issues"
+  },
+  "homepage": "https://github.com/Anisboudaren/SMMservmoi#readme"
+}
