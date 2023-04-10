@@ -17,7 +17,7 @@ authRouter.get('/login' , (req , res)=>{
 authRouter.post('/login' , passport.authenticate('local') , async (req , res) =>{
     const amount = await getBalance(req.user._id )
     console.log("this guys balance is " ,amount);
-    res.redirect('/home')
+    res.render("home" ,  {client : `hello , ${req.user.username} , your current balance is : ${amount}`})
 })
 
 authRouter.post('/register' , async (req , res) =>{
@@ -32,5 +32,13 @@ if(user){
     res.status(201).render("login"  , { message : "your user has been added try to log in " + newUser })
 }
 })
+
+authRouter.get("/home"  , async (req , res) => {
+    console.log("homey")
+  if(!req.user) return res.render("home" , {client : "you have to login first"})
+  console.log(req.invoice)
+  const amount = await getBalance(req.user._id )
+  res.render("home" ,  {client : `hello , ${req.user.username} , your current balance is : ${amount}`})
+  })
 
 module.exports = authRouter
