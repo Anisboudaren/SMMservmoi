@@ -12,7 +12,7 @@ require("./config/passport.config")
 //routes
 const authRoute = require('./routes/auth.route.js'); 
 const paymentRoute = require('./routes/payment.route')
-
+const userRoute = require('./routes/user.route')
 
 
 require('./config/mongoDB.config')
@@ -37,26 +37,19 @@ app.use(
 );
 app.use(passport.initialize())
 app.use(passport.session())
+
+//ROUTES 
+
 app.use('/api/v1/' , authRoute); 
 app.use('/api/v1/payment' , paymentRoute)
+app.use('/api/v1/' , userRoute)
+
 app.get("/" , (req , res)=>{
   console.log("i am in side my server");
   res.send("boom")
 })
 
-app.get("/home"  , (req , res) => {
-  console.log("homey")
-if(!req.user) return res.render("home" , {client : "you have to login first"})
-console.log(req.invoice)
-      if(req.invoice)
-     { if(req.invoice.status == "canceled") {
-        return res.render("home", {client : `Mr ${client} , you have canceled the order`})
-      }else {
-      
-        return res.render("home", {client : `the order was successful here is you new information and your new balance is `})
-      }}
-      res.render("home" , {client : req.user.username})
-})
+
 
 const HOSTNAME = process.env.HOSTNAME || '197.206.31.128'
 app.listen(PORT , (err, suc) => {
