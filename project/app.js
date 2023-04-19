@@ -12,7 +12,8 @@ require("./config/passport.config")
 //routes
 const authRoute = require('./routes/auth.route.js'); 
 const paymentRoute = require('./routes/payment.route')
-const userRoute = require('./routes/user.route')
+const userRoute = require('./routes/user.route');
+const serviceRouter = require('./routes/services.route');
 
 
 require('./config/mongoDB.config')
@@ -20,7 +21,6 @@ require('./config/mongoDB.config')
 
 const app = express()
 const PORT = process.env.PORT || 3000
-
 
 app.use(express.json())
 app.set('view engine' , 'ejs')
@@ -43,13 +43,11 @@ app.use(passport.session())
 app.use('/api/v1/' , authRoute); 
 app.use('/api/v1/payment' , paymentRoute)
 app.use('/api/v1/' , userRoute)
-
+app.use("/api/v1/service" , serviceRouter)
 app.get("/" , (req , res)=>{
   console.log("i am in side my server");
-  res.send("boom")
+  res.render("service")
 })
-
-
 
 const HOSTNAME = process.env.HOSTNAME || '197.206.31.128'
 app.listen(PORT , (err, suc) => {
