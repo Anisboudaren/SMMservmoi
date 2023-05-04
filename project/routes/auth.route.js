@@ -10,8 +10,9 @@ const passport = require("passport");
 // })
 authRouter.post("/login", passport.authenticate("local"), async (req, res) => {
   const amount = await getBalanceByUserId(req.user._id);
-  res.json({
+  return res.json({
     client: `hello , ${req.user.username} , your current balance is : ${amount}`,
+    result : true
   });
 });
 
