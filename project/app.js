@@ -13,18 +13,20 @@ require("./config/passport.config");
 const authRoute = require("./routes/auth.route.js");
 const paymentRoute = require("./routes/payment.route");
 const userRoute = require("./routes/user.route");
-const serviceRouter = require('./routes/services.route');
+const serviceRouter = require("./routes/services.route");
 
 require("./config/mongoDB.config");
 
 const app = express();
 const PORT = process.env.PORT || 3333;
-app.use(cors( {
-  credentials: true,
-  origin: "http://localhost:3000",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: "Content-Type,Authorization"
-} ));
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
 
 app.use(express.json());
 app.set("view engine", "ejs");
@@ -42,16 +44,21 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie:{
-      httpOnly : true , 
-      maxAge : 1000 * 60 * 60 * 24 *7 ,
-      sameSite : "Lax",
-      secure : true
-    }
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      sameSite: "Lax",
+    },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  console.log(req.cookies);
+  console.log(req.user); // log the cookies object to the console
+  next();
+});
 
 app.post("/", (req, res) => {
   console.log("its working");
